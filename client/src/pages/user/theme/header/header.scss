@@ -1,0 +1,30 @@
+.header-top-color{
+    background: #eaee11;
+}
+
+
+.header-top-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.header-top-right.u{
+    display: flex;
+    column-gap: 30px;
+    list-style: none;
+}
+
+.namepage{
+    margin-top: 10px;
+    align-items: center;
+}
+
+.Cart-btn{
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-around;
+    gap: 16px;
+}
