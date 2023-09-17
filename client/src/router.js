@@ -3,6 +3,7 @@ import HomePage from './pages/user/homePage';
 import { ROUTERS} from "./utils/router"
 import MasterLayout from './pages/user/theme/masterLayout';
 import ProFilePage from './pages/user/proFilePage';
+import Register from './pages/user/Register/Register';
 
 const renderUserRouter = () => {
     const userRouter = [
@@ -13,6 +14,10 @@ const renderUserRouter = () => {
         {
             path: ROUTERS.USER.PROFILE,
             component: <ProFilePage />,
+        },
+        {
+            path: ROUTERS.USER.REGISTER,
+            component: <Register/>,
         },
     ];
 

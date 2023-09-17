@@ -1,0 +1,44 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #faf8f8;
+}
+//body-left
+.body-left{
+ align-items: center;
+ display: flex;
+ justify-content: flex-start;
+}
+
+//body-left-options
+
+.form-boy-left{
+
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 30px;
+    border:1px solid #b4b0b0 ;
+    border-radius: 5px;
+}
+
+////body-mid
+.body-mid{
+ align-items: center;
+ display: flex;
+ justify-content: center;
+}
+
+
+//body-right
+.body-right{
+ align-items: center;
+ display: flex;
+ justify-content: center;
+}
