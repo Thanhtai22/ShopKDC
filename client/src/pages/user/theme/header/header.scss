@@ -1,10 +1,15 @@
 
 
 .header-top-color{
-    background: #ffd400;
+    background: #fff;
     
 }
 
+.navbar-nav{
+    // border: 1px solid #009EFD;
+    // border-radius: 4px;
+    box-shadow: inset;
+}
 
 .header-top-right {
     display: flex;
@@ -18,10 +23,10 @@
     list-style: none;
 }
 
-.fa-cart-shopping,
-.fa-user{
-    color: rgb(0, 0, 0);
-}
+// .fa-cart-shopping,
+// .fa-user{
+//     color: rgb(0, 0, 0);
+// }
 
 .Cart-btn{
     
@@ -44,10 +49,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    background: #2f3640;
+    background: #cfd1d3;
     border-radius: 50px;
     position: relative;
     width: 100%;
+    margin-top: 15px;
 
 }
   
@@ -55,8 +61,8 @@
     color: white;
     position: absolute;
     right: 8px;
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
     border: 0;
@@ -65,14 +71,14 @@
     
 }
   /*hover effect*/
-button:hover {
+.searchButton:hover {
     color: #fff;
     background-color: #1A1A1A;
-    box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+    // box-shadow: rgba(0, 0, 0, 0.5) 0 0px 0px;
     transform: translateY(-3px);
 }
-  /*button pressing effect*/
-button:active {
+  /*searchButton pressing effect*/
+.searchButton:active {
     box-shadow: none;
     transform: translateY(0);
 }
@@ -83,7 +89,7 @@ button:active {
     outline: none;
     color: white;
     font-size: 15px;
-    padding: 20px 46px 20px 20px;
+    padding: 10px 46px 10px 10px;
     width: 400px;
 }
   

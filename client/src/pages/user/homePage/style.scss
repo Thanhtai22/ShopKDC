@@ -2,7 +2,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-color: #faf8f8;
+    background-color: #fffefe;
 }
 //body-left
 .body-left{
@@ -33,6 +33,38 @@ body {
  align-items: center;
  display: flex;
  justify-content: center;
+}
+.slide{
+    width: 100%;
+    
+}
+.carousel-inner{
+    height: 400px;
+
+}
+.carousel-control-prev-icon{
+    color: black;
+}
+.carousel-control-prev:hover{
+    background-color: transparent;
+    
+}
+.carousel-control-next:hover{
+    background-color: transparent;
+    
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+}
+
+.nav-header{
+    // background-color: #fff;
+    left: 84%;
+    bottom: 0px;
+    font-size: larger;
+
 }
 
 

@@ -2,12 +2,14 @@ import {memo} from 'react'
 import './style.scss'
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Link } from 'react-router-dom';
+
 
 const Login = () => {
   return (
     <div className='container'>
       <div className='row'>
-            <div class="card">
+            <div class="card-login">
               <div class="card2">
                 <form class="form form-reg">
                     <p id="heading">Đăng nhập</p>
@@ -24,8 +26,8 @@ const Login = () => {
                       <input type="password" class="input-field" placeholder="Mật khẩu"/>
                     </div>
                     <div class="btn">
-                    <button class="button1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                    <button class="button2">Đăng ký</button>
+                    <Link to="/"><button class="button1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></Link>
+                    <Link to="/regsister"><button class="button2">Đăng ký</button></Link>
                     </div>
                     <button class="button3">Quên mật khẩu</button>
                 </form>

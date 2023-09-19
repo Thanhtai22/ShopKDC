@@ -5,6 +5,9 @@ import MasterLayout from './pages/user/theme/masterLayout';
 import ProFilePage from './pages/user/proFilePage';
 // import Register from './pages/user/Login/Login';
 import Login from './pages/user/Login/Login';
+import ProductDetail from './pages/user/productDetail/productDetail';
+import Cart from './pages/user/cart/Cart';
+import Regsister from './pages/user/regsister/Regsister';
 
 const renderUserRouter = () => {
     const userRouter = [
@@ -19,6 +22,18 @@ const renderUserRouter = () => {
         {
             path: ROUTERS.USER.LOGIN,
             component: <Login/>,
+        },
+        {
+            path: ROUTERS.USER.PRODUCTDETAIL,
+            component: <ProductDetail/>
+        },
+        {
+            path: ROUTERS.USER.CART,
+            component: <Cart/>
+        },
+        {
+            path: ROUTERS.USER.REGSISTER,
+            component: <Regsister/>
         },
     ];
 
