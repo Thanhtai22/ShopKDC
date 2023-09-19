@@ -11,7 +11,7 @@ const Login = () => {
       <div className='row'>
             <div class="card-login">
               <div class="card2">
-                <form class="form form-reg">
+                <form class="form form-log">
                     <p id="heading">Đăng nhập</p>
                     <div class="field">
                     <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="input-icon">
