@@ -13,7 +13,7 @@ const Cart = () => {
     }
     return (
         <div className='container'>
-            <div className='row'>
+            <div className='row row-cart'>
                 <table class="table">
                     <thead>
                         <tr>
