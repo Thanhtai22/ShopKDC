@@ -36,7 +36,7 @@ const Regsister = () => {
                             <span><h6>Nhập lại mật khẩu:</h6></span>
                     </label>
                     <button class="submit">Đăng ký</button>
-                    <p class="signin-reg">Bạn chưa có tài khoản? <a href="#">Đăng nhập</a> </p>
+                    <p class="signin-reg">Bạn chưa có tài khoản? <a href="/login">Đăng nhập</a> </p>
                 </form>
             </div>
         </div>
