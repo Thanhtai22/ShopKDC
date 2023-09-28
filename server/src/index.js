@@ -7,7 +7,8 @@ const bodyParser = require("body-parser");
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3001;
+// const port = process.env.PORT || 3001;
+// const port = 3001;
  
 
 app.use(bodyParser.json());
@@ -16,6 +17,6 @@ routes(app);
 db.connect()
 
 
-app.listen(port, ()=>{
-    console.log('server is running in port:' +port);
+app.listen(3001, ()=>{
+    console.log('server is running in port: 3001');
 })
