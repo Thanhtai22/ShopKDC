@@ -1,6 +1,6 @@
 const User = require("../models/UserModel")
 const bcrypt = require("bcrypt")
-const { genneralAccessToken, genneralRefreshToken } = require("./JwtSevice")
+const { genneralAccessToken, genneralRefreshToken } = require("../services/JwtService")
 
 const createUser = (newUser) => {
     return new Promise(async (resolve, reject) => {
@@ -41,7 +41,7 @@ const loginUser = (userLogin) => {
         const { name, email, password, confirmPassword, phone } = userLogin
         try {
             const checkUser = await User.findOne({
-                email: email
+                email
             })
             if (checkUser === null) {
                 resolve({
@@ -50,29 +50,33 @@ const loginUser = (userLogin) => {
                 })
             }
             const comparePassword = bcrypt.compareSync(password, checkUser.password)
-            console.log('comparePassWord', comparePassword)
             
             if (!comparePassword) {
                 resolve({
                     status: 'ERR',
                     message: 'the password user is incorect'
                 })
-            }
+            } 
+          
             const access_token = await genneralAccessToken({
                 id: checkUser.id,
                 isAdmin: checkUser.isAdmin
             })
-            const refresh_token = await genneralRefreshToken({
+            const refresh_token =  await genneralRefreshToken({
                 id: checkUser.id,
                 isAdmin: checkUser.isAdmin
             })
-
+            // console.log('acccc',access_token)
+            // console.log('acccc',refresh_token)
             resolve({
                 status: 'OK',
-                message: "SUCCESS",
+                message: 
+                checkUser,
                 access_token,
                 refresh_token,
             })
+        
+            // console.log('accccess',access_token)
             // }
 
         } catch (e) {
