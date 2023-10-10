@@ -50,7 +50,7 @@ const loginUser = (userLogin) => {
                     message: "the user is not defined"
                 })
             }
-            const comparePassword = bcrypt.compareSync(password, checkUser.password)
+            const comparePassword = bcrypt.compare(password, checkUser.password)
             
             if (!comparePassword) {
                 resolve({
@@ -170,6 +170,20 @@ const getDetailsUser = (id) => {
         }
     })
 }
+const deleteManyUser = (ids) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            await User.deleteMany({ _id: ids })
+            resolve({
+                status: 'OK',
+                message: 'Delete user success',
+            })
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
 module.exports = {
     createUser,
     loginUser,
@@ -177,4 +191,5 @@ module.exports = {
     deleteUser,
     getAllUser,
     getDetailsUser,
+    deleteManyUser,
 }
