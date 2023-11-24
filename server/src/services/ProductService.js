@@ -105,14 +105,49 @@ const deleteProduct = (id) => {
     })
 }
 
-const getAllProduct = () => {
+const getAllProduct = (limit , page, sort , filter) => {
+    console.log('sort',sort)
     return new Promise(async (resolve, reject) => {
         try {
-            const allProduct = await Product.find().sort({createdAt: -1, updatedAt: -1})
+            const totalProduct = await Product.count()
+            if(filter){
+                const label= filter[0];
+                 const allObjectFilter = await Product.find({
+                    [label]: {'$regex': filter[1]}
+                }).limit(limit).skip(page * limit)
+                resolve({
+                    status: 'OK',
+                    message: 'Success',
+                    data: allObjectFilter,
+                    total: totalProduct,
+                    pageCurrent: Number(page +1),
+                    totalPage: Math.ceil(totalProduct/limit)
+                })
+            }
+            if(sort){
+                const objectSort={}
+                objectSort[sort[1]]=sort[0]
+                console.log("obj",objectSort)
+                const allProductSort = await Product.find().limit(limit).skip(page * limit).sort(objectSort)
+                resolve({
+                    status: 'OK',
+                    message: 'Success',
+                    data: allProductSort,
+                    total: totalProduct,
+                    pageCurrent: Number(page +1),
+                    totalPage: Math.ceil(totalProduct/limit)
+                })
+            }
+            const allProduct = await Product.find().limit(limit).skip(page * limit).sort({
+                name: sort,
+            })
             resolve({
                 status: 'OK',
                 message: 'Success',
-                data: allProduct
+                data: allProduct,
+                total: totalProduct,
+                pageCurrent: Number(page +1),
+                totalPage: Math.ceil(totalProduct/limit)
             })
         } catch (e) {
             reject(e)

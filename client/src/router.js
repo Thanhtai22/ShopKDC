@@ -8,8 +8,11 @@ import Login from './pages/user/Login/Login';
 import ProductDetail from './pages/user/productDetail/productDetail';
 import Cart from './pages/user/cart/Cart';
 import Regsister from './pages/user/regsister/Regsister';
+import { useEffect } from 'react';
+import  axios  from 'axios';
 
-const renderUserRouter = () => {
+
+function renderUserRouter  ()  {
     const userRouter = [
         {
             path: ROUTERS.USER.HOME,
@@ -37,6 +40,15 @@ const renderUserRouter = () => {
         },
     ];
 
+//     useEffect(() => {
+//         fetchApi()
+
+//   },[] )
+
+//   const fetchApi = async () => {
+//         const res = await axios.get(`http://localhost:3001/api/product/get-all`)
+//         console.log('res', res)
+//   }
     return (
         <MasterLayout>       
         <Routes>
@@ -50,7 +62,7 @@ const renderUserRouter = () => {
     );
 }
 
-const RouterCustom = () => {
-    return renderUserRouter();
-}
-export default RouterCustom;
+// const RouterCustom = () => {
+//     return renderUserRouter();
+// }
+export default renderUserRouter
