@@ -30,8 +30,8 @@ class Users {
 
     async checkLogin(req, res) {
         const { username, password } = req.body;
-        const user = await User.findOne({ username})
-        const passwordMatch = await bcrypt.compareSync(password, user.password);
+        const user = await User.findOne({ username});
+        const passwordMatch = await bcrypt.compare(password, user.password);
         const secretKey = 'abcd'
 
         if(passwordMatch) {

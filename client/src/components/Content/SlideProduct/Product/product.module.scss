@@ -1,0 +1,21 @@
+
+
+.card {
+    width: 200px;
+    margin-left: 10px;
+}
+
+.price {
+    color: blue;
+    font-weight: 600;
+}
+
+.img_product:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease 0s;    
+    cursor: pointer;
+}
+
+.img_product {
+    padding: 10px;
+}

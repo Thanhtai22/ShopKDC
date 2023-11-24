@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "website thuong mai dien tu",
+  "description": "website ban laptop",
   "main": "server.js",
   "scripts": {
     "start": "nodemon ./server.js",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/khanhly12345/Nien_Luan_Nganh"
+    "url": "https://github.com/Thanhtai22/ShopKDC"
   },
-  "author": "khanh ly",
+  "author": "thanh tai",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
