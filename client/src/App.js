@@ -1,85 +1,86 @@
-// import Header from './components/Header'
-// import Footer from './components/Footer';
-// import GlobalStyle from './components/GlobalStyle';
-// import { Outlet } from 'react-router-dom';
-
-
-// function App() {
-//   return (
-//     <GlobalStyle>
-//       <div className="App">
-//           <Header />
-//               <Outlet />
-//           <Footer />
-//       </div>
-//     </GlobalStyle>
-
-//   );
-// }
-
-// export default App;
-
-// import Header from './components/Header'
-// import Footer from './components/Footer';
-// import GlobalStyle from './components/GlobalStyle';
-// import { Outlet } from 'react-router-dom';
-import Content from './components/Content';
-import Cart from './components/Cart';
-import Detail from './components/Detail';
-import Login from './components/Login';
-import Register from './components/Register';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import Admin from './components/Admin';
-import ProductAdmin from './components/Admin/ProductAdmin';
-import AddProduct from './components/Admin/ProductAdmin/AddProduct';
-import EditProduct from './components/Admin/ProductAdmin/EditProduct';
-import Order from './components/Admin/Order';
-import DetailOrder from './components/Admin/Order/DetailOrder';
-import Filter from './components/Filter';
-import LoginAdmin from './components/Admin/LoginAdmin';
-import Account from './components/Admin/Account';
-import AddAdmin from './components/Admin/Account/AddAdmin/addadmin';
-import EditAdmin from './components/Admin/Account/EditAdmin';
-import Overview from './components/Admin/Overview';
-import User from './components/Admin/User';
-import Search from './components/Search';
+import React, { Fragment, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import DefaultComponent from './components/DefaultComponent/DefaultComponent'
+import { routes } from './routes'
+import { isJsonString } from './utils'
+import jwt_decode from "jwt-decode";
+import * as UserService from './services/UserService'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetUser, updateUser } from './redux/slides/userSlide'
+import Loading from './components/LoadingComponent/Loading'
 
 function App() {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false)
+  const user = useSelector((state) => state.user)
+
+  useEffect(() => {
+    setIsLoading(true)
+    const { storageData, decoded } = handleDecoded()
+    if (decoded?.id) {
+      handleGetDetailsUser(decoded?.id, storageData)
+    }
+    setIsLoading(false)
+  }, [])
+
+  const handleDecoded = () => {
+    let storageData = user?.access_token || localStorage.getItem('access_token')
+    let decoded = {}
+    if (storageData && isJsonString(storageData) && !user?.access_token) {
+      storageData = JSON.parse(storageData)
+      decoded = jwt_decode(storageData)
+    }
+    return { decoded, storageData }
+  }
+
+  UserService.axiosJWT.interceptors.request.use(async (config) => {
+    // Do something before request is sent
+    const currentTime = new Date()
+    const { decoded } = handleDecoded()
+    let storageRefreshToken = localStorage.getItem('refresh_token')
+    const refreshToken = JSON.parse(storageRefreshToken)
+    const decodedRefreshToken =  jwt_decode(refreshToken)
+    if (decoded?.exp < currentTime.getTime() / 1000) {
+      if(decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+        const data = await UserService.refreshToken(refreshToken)
+        config.headers['token'] = `Bearer ${data?.access_token}`
+      }else {
+        dispatch(resetUser())
+      }
+    }
+    return config;
+  }, (err) => {
+    return Promise.reject(err)
+  })
+
+  const handleGetDetailsUser = async (id, token) => {
+    let storageRefreshToken = localStorage.getItem('refresh_token')
+    const refreshToken = JSON.parse(storageRefreshToken)
+    const res = await UserService.getDetailsUser(id, token)
+    dispatch(updateUser({ ...res?.data, access_token: token, refreshToken: refreshToken}))
+  }
+
   return (
-    <>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<Content />}/>
-          <Route path='/cart' element={<Cart />}/>
-          <Route path='/detail' element={<Detail />}>
-            <Route path=':id' element={<Detail />}/>
-          </Route>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/register' element={<Register />}/>
-          <Route path='/filter/:id' element={<Filter />}/>
-          <Route path='/search/:value' element={<Search />}/>
-        </Route>
-      </Routes>
-      <Routes >
-        <Route path='/admin' element={<Admin />} >
-          <Route path='product' element={<ProductAdmin />} />
-          <Route path='addProduct' element={<AddProduct />} />
-          <Route path='editProduct/:id' element={<EditProduct />} />
-          <Route path='order' element={<Order />}/>
-          <Route path='detailOrder/:id' element={<DetailOrder />}/>
-          <Route path='account' element={<Account />}/>
-          <Route path='addAdmin' element={<AddAdmin />}/>
-          <Route path='editadmin/:id' element={<EditAdmin />}/>
-          <Route path='' element={<Overview />}/>
-          <Route path='user' element={<User />}/>
-        </Route>
-      </Routes>
-      <Routes>
-        <Route path='/loginadmin/' element={<LoginAdmin />} />
-      </Routes>
-    </>
-  );
+    <div style={{height: '100vh', width: '100%'}}>
+      <Loading isLoading={isLoading}>
+        <Router>
+          <Routes>
+            {routes.map((route) => {
+              const Page = route.page
+              const Layout = route.isShowHeader ? DefaultComponent : Fragment
+              return (
+                <Route key={route.path} path={route.path} element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                } />
+              )
+            })}
+          </Routes>
+        </Router>
+      </Loading>
+    </div>
+  )
 }
 
-export default App;
+export default App
