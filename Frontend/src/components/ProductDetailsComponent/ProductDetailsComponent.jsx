@@ -1,22 +1,33 @@
 import { Col, Image, Rate, Row } from 'antd'
 import React from 'react'
 import imageProductSmall from '../../assets/images/imagesmall.webp'
-import { WrapperStyleImageSmall, WrapperStyleColImage, WrapperStyleNameProduct, WrapperStyleTextSell, WrapperPriceProduct, WrapperPriceTextProduct, WrapperAddressProduct, WrapperQualityProduct, WrapperInputNumber, WrapperBtnQualityProduct } from './style'
+import { 
+    WrapperStyleImageSmall, 
+    WrapperStyleColImage, 
+    WrapperStyleNameProduct, 
+    WrapperStyleTextSell, 
+    WrapperPriceProduct, 
+    WrapperPriceTextProduct, 
+    WrapperAddressProduct, 
+    WrapperQualityProduct, 
+    WrapperInputNumber, 
+    WrapperBtnQualityProduct 
+    } from './style'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons'
 import ButtonComponent from '../ButtonComponent/ButtonComponent'
 import * as ProductService from '../../services/ProductService'
 import { useQuery } from '@tanstack/react-query'
 import Loading from '../LoadingComponent/Loading'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide'
 import { convertPrice, initFacebookSDK } from '../../utils'
-import { useEffect } from 'react'
+// import {  } from 'react'
 import * as message from '../Message/Message'
-import LikeButtonComponent from '../LikeButtonComponent/LikeButtonComponent'
-import CommentComponent from '../CommentComponent/CommentComponent'
-import { useMemo } from 'react'
+import {LikeButtonComponent} from '../LikeButtonComponent/LikeButtonComponent'
+import {CommentComponent} from '../CommentComponent/CommentComponent'
+
 
 const ProductDetailsComponent = ({ idProduct }) => {
     const [numProduct, setNumProduct] = useState(1)
@@ -80,17 +91,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
         if (!user?.id) {
             navigate('/sign-in', { state: location?.pathname })
         } else {
-            // {
-            //     name: { type: String, required: true },
-            //     amount: { type: Number, required: true },
-            //     image: { type: String, required: true },
-            //     price: { type: Number, required: true },
-            //     product: {
-            //         type: mongoose.Schema.Types.ObjectId,
-            //         ref: 'Product',
-            //         required: true,
-            //     },
-            // },
+           
             const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
             if ((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
                 dispatch(addOrderProduct({
@@ -217,4 +218,4 @@ const ProductDetailsComponent = ({ idProduct }) => {
     )
 }
 
-export default ProductDetailsComponent
+export default  ProductDetailsComponent
