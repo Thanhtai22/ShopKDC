@@ -29,7 +29,7 @@ import {LikeButtonComponent} from '../LikeButtonComponent/LikeButtonComponent'
 import {CommentComponent} from '../CommentComponent/CommentComponent'
 
 
-const ProductDetailsComponent = ({ idProduct }) => {
+const ProductDetailsComponent = ( {idProduct} ) => {
     const [numProduct, setNumProduct] = useState(1)
     const user = useSelector((state) => state.user)
     const order = useSelector((state) => state.order)
@@ -52,9 +52,9 @@ const ProductDetailsComponent = ({ idProduct }) => {
         }
     }
 
-    useEffect(() => {
-        initFacebookSDK()
-    }, [])
+    // useEffect(() => {
+    //     initFacebookSDK()
+    // }, [])
 
     useEffect(() => {
         const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
@@ -116,7 +116,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
             <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px', height: '100%' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
                     <Image src={productDetails?.image} alt="image prodcut" preview={false} />
-                    <Row style={{ paddingTop: '10px', justifyContent: 'space-between' }}>
+                    {/* <Row style={{ paddingTop: '10px', justifyContent: 'space-between' }}>
                         <WrapperStyleColImage span={4} sty>
                             <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
                         </WrapperStyleColImage>
@@ -140,7 +140,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
                         </WrapperStyleColImage>
 
-                    </Row>
+                    </Row> */}
                 </Col>
                 <Col span={14} style={{ paddingLeft: '10px' }}>
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
@@ -156,12 +156,12 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <span className='address'>{user?.address}</span> -
                         <span className='change-address'>Đổi địa chỉ</span>
                     </WrapperAddressProduct>
-                    <LikeButtonComponent
+                    {/* <LikeButtonComponent
                      dataHref={ process.env.REACT_APP_IS_LOCAL 
                                 ? "https://developers.facebook.com/docs/plugins/" 
                                 : window.location.href
                             } 
-                    />
+                    /> */}
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
                         <div style={{ marginBottom: '10px' }}>Số lượng</div>
                         <WrapperQualityProduct>
@@ -189,7 +189,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                 textbutton={'Chọn mua'}
                                 styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                             ></ButtonComponent>
-                            {errorLimitOrder && <div style={{ color: 'red' }}>San pham het hang</div>}
+                            {errorLimitOrder && <div style={{ color: 'red' }}>Sản phẩm hết hàng</div>}
                         </div>
                         <ButtonComponent
                             size={40}
@@ -205,13 +205,13 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         ></ButtonComponent>
                     </div>
                 </Col>
-                <CommentComponent
+                {/* <CommentComponent
                     dataHref={process.env.REACT_APP_IS_LOCAL 
                         ? "https://developers.facebook.com/docs/plugins/comments#configurator"
                         : window.location.href
                     } 
                     width="1270"
-                />
+                /> */}
             </Row>
 
         </Loading>
