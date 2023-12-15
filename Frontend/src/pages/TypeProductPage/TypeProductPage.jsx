@@ -76,13 +76,15 @@ const TypeProductPage = () => {
                         
                         <Col  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                             <WrapperProducts >
-                                {products?.filter((pro) => {
+                                {products?.
+                                filter((pro) => {
                                     if (searchDebounce === '') {
                                         return pro
                                     } else if (pro?.name?.toLowerCase()?.includes(searchDebounce?.toLowerCase())) {
                                         return pro
                                     }
-                                })?.map((product) => {
+                                })?.
+                                map((product) => {
                                     return (
                                         <CardComponent
                                             key={product._id}

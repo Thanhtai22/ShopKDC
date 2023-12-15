@@ -108,7 +108,7 @@ const PaymentPage = () => {
             shippingPrice: diliveryPriceMemo,
             totalPrice: totalPriceMemo,
             user: user?.id,
-            email: user?.email
+            // email: user?.email
           }
         )
       }

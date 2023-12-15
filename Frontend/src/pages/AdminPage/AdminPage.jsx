@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getItem } from '../../utils';
 import { UserOutlined, AppstoreOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import HeaderComponent from '../../components/HeaderCompoent/HeaderComponent';
+import HeaderAdmin from '../../components/HeaderAdmin/HeaderAdmin';
 import AdminUser from '../../components/AdminUser/AdminUser';
 import AdminProduct from '../../components/AdminProduct/AdminProduct';
 import OrderAdmin from '../../components/OrderAdmin/OrderAmin';
@@ -95,7 +96,7 @@ const AdminPage = () => {
   // console.log('memoCount', memoCount)
   return (
     <>
-      <HeaderComponent isHiddenSearch isHiddenCart />
+      <HeaderComponent isHiddenSearch isHiddenCart/>
       <div style={{ display: 'flex',overflowX: 'hidden' }}>
         <Menu
           mode="inline"
